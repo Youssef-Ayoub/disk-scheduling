@@ -144,6 +144,16 @@ public class Main {
 
                     OPT obj4 = new OPT( n[0] ,list, head[0] ) ;
                     obj4.operate();
+                    Circular_Look obj5 =new Circular_Look ( list,head[0],n[0] );
+                    System.out.println ( "Cost = " +obj5.operate ());
+                    System.out.println (  obj5.getPath ());
+                    Circular_SCAN obj6 =new Circular_SCAN ( list,head[0],n[0],200 );
+                    System.out.println ( "Cost = " +obj6.operate ());
+                    System.out.println (  obj6.getPath ());
+                    SSTF obj7 =new SSTF ( list,head[0],n[0]);
+                    System.out.println ( "Cost = " +obj7.operate ());
+                    System.out.println (  obj7.getPath ());
+
                 }
             };
          sendInputs.addActionListener ( al );
@@ -165,6 +175,15 @@ public class Main {
 
            OPT obj4 = new OPT( n[0] ,list, head[0] ) ;
            obj4.operate();
+           Circular_Look obj5 =new Circular_Look ( list,head[0],n[0] );
+           System.out.println ( "Cost = " +obj5.operate ());
+           System.out.println (  obj5.getPath ());
+           Circular_SCAN obj6 =new Circular_SCAN ( list,head[0],n[0],200 );
+           System.out.println ( "Cost = " +obj6.operate ());
+           System.out.println (  obj6.getPath ());
+           SSTF obj7 =new SSTF ( list,head[0],n[0]);
+           System.out.println ( "Cost = " +obj7.operate ());
+           System.out.println (  obj7.getPath ());
        }
 
 
