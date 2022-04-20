@@ -1,3 +1,4 @@
+package com.company;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -6,7 +7,7 @@ public class Circular_SCAN {
     int head ;
     int numberOfData ;
     int lasOne;
-
+    ArrayList<Integer> path=new ArrayList <> (  );
     public Circular_SCAN ( ArrayList<Integer> data, int head, int numberOfData, int lasOne ) {
         this.data = data;
         this.head = head;
@@ -46,7 +47,11 @@ public class Circular_SCAN {
         this.numberOfData = numberOfData;
     }
 
-    public int implementation(ArrayList<Integer> path)
+    public ArrayList < Integer > getPath ( ) {
+        return path;
+    }
+
+    public int operate ( )
     {
         Collections.sort ( data );
         int start = 0 ;
