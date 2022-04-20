@@ -24,7 +24,7 @@ public class OPT {
             cost += Math.abs(queue.get(i) - queue.get(i+1) ) ;
         }
         System.out.println(queue);
-        System.out.println(cost);
+        System.out.println("cost = " + cost);
     }
 
     public ArrayList<Integer> getQueue() {
