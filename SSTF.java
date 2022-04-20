@@ -1,3 +1,4 @@
+package com.company;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -6,7 +7,7 @@ public class SSTF {
     ArrayList<Boolean> visited  = new ArrayList<> (  );
     int head ;
     int numberOfData ;
-
+    ArrayList<Integer> path=new ArrayList <> (  );
     public SSTF ( ArrayList<Integer> data, int head, int numberOfData ) {
         this.data = data;
         this.head = head;
@@ -47,27 +48,32 @@ public class SSTF {
         }
         return ans ;
     }
-    public Integer implementation(ArrayList<Integer> path)
+
+    public ArrayList < Integer > getPath ( ) {
+        return path;
+    }
+
+    public Integer operate ( )
     {
-       int ans = 0 ;
-       int pointer = head ;
-       while ( !finished () )
-       {
-           int partialSum = 10000000 ;
-           int index = 0 ;
-           for ( int i = 0 ; i < numberOfData ; i++ ) {
-               if(partialSum > Math.abs (data.get ( i ) - pointer) && !visited.get ( i ))
-               {
-                   partialSum = Math.abs (data.get ( i ) - pointer ) ;
-                   index = i ;
-               }
-           }
-           ans += partialSum ;
-           path.add ( pointer );
-           pointer = data.get ( index );
-           visited.set ( index , true );
-       }
-       path.add ( pointer );
-       return ans ;
+        int ans = 0 ;
+        int pointer = head ;
+        while ( !finished () )
+        {
+            int partialSum = 10000000 ;
+            int index = 0 ;
+            for ( int i = 0 ; i < numberOfData ; i++ ) {
+                if(partialSum > Math.abs (data.get ( i ) - pointer) && !visited.get ( i ))
+                {
+                    partialSum = Math.abs (data.get ( i ) - pointer ) ;
+                    index = i ;
+                }
+            }
+            ans += partialSum ;
+            path.add ( pointer );
+            pointer = data.get ( index );
+            visited.set ( index , true );
+        }
+        path.add ( pointer );
+        return ans ;
     }
 }
