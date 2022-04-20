@@ -3,22 +3,20 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SCAN {
+public class LOOK {
     private ArrayList<Integer> queue = new ArrayList<>() ;
     private int sizeOfQueue ;
     private int startHead ;
-    private int finalTail ;
     private int cost;
     private boolean direction ;
     private ArrayList<Integer>sequence = new ArrayList<>() ;
 
-    SCAN(int size , ArrayList<Integer>l , int start ,int end, boolean dir ){
+    LOOK(int size , ArrayList<Integer>l , int start , boolean dir ){
         this.sizeOfQueue = size ;
         this.queue.addAll(l) ;
         this.startHead = start ;
         cost = 0 ;
         direction = dir ;
-        finalTail = end ;
     }
 
     void operate(){
@@ -30,7 +28,6 @@ public class SCAN {
             for(int i = index ; i <= sizeOfQueue ; ++i){
                 sequence.add(queue.get(i));
             }
-            sequence.add(finalTail);
             index-- ;
             for(int i = index ; i >= 0 ; --i){
                 sequence.add(queue.get(i));
@@ -40,14 +37,12 @@ public class SCAN {
             for(int i = index ; i >= 0 ; --i){
                 sequence.add(queue.get(i));
             }
-            sequence.add(0);
             index++ ;
             for(int i = index ; i <= sizeOfQueue ; ++i){
                 sequence.add(queue.get(i));
             }
 
         }
-
         for(int i = 0 ; i < sequence.size() - 1 ; ++i){
             cost += Math.abs( sequence.get(i) - sequence.get(i+1) ) ;
         }
