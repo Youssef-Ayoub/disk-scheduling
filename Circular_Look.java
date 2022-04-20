@@ -1,3 +1,5 @@
+package com.company;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -5,7 +7,7 @@ public class Circular_Look {
     ArrayList<Integer> data ;
     int head ;
     int numberOfData ;
-
+    ArrayList<Integer> path=new ArrayList <> (  );
     public Circular_Look ( ArrayList<Integer> data, int head, int numberOfData  ) {
         this.data = data;
         this.head = head;
@@ -35,8 +37,11 @@ public class Circular_Look {
     public void setNumberOfData ( int numberOfData ) {
         this.numberOfData = numberOfData;
     }
+    public ArrayList < Integer > getPath ( ) {
+        return path;
+    }
 
-    public int implementation(ArrayList<Integer> path)
+    public int operate ()
     {
         Collections.sort ( data );
         int start = 0 ;
