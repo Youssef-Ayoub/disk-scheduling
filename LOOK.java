@@ -48,6 +48,7 @@ public class LOOK {
         }
         System.out.println(sequence);
         System.out.println("cost = " + cost);
+        queue=sequence;
     }
 
     public ArrayList<Integer> getQueue() {
