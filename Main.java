@@ -8,7 +8,62 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+class MyDraw{
+    JFrame form;
+    public int border=5;
+    public Color color=Color.BLUE;
+    public ArrayList<Integer>Points;
+    public MyDraw(JFrame form,ArrayList<Integer>Points)
+    {
 
+        this.form=form;
+        this.Points=Points;
+    }
+    public void drawLine()
+    {
+        JPanel pnl=new JPanel (  ){
+            @Override
+            public void paintComponent(Graphics g)
+            {
+                Graphics2D g2=(Graphics2D)g;
+                g2.setStroke ( new BasicStroke ( border ));
+                g2.setColor ( color );
+                //x1 distance from left , x2 the size of width , y1 the distance from up,
+              /*
+               FCFS
+               98 183 37 122 14 124 65 67
+
+                 g2.drawLine (53 ,10,65,20 );
+              g2.drawLine (65 ,20,67,30 );
+              g2.drawLine (67 ,30,37,40 );
+              g2.drawLine (37 ,40,14,50 );
+              g2.drawLine (14 ,50,98,60 );
+              g2.drawLine (98 ,60,122,70 );
+              g2.drawLine (122 ,70,124,80 );
+              g2.drawLine (124 ,80,183,90 );
+               */
+                int cnt=10;
+                for ( int i=0;i<Points.size ()-1;i++ )
+                {
+                   // System.out.println ( Points.get ( i )+" "+Points.get ( i+1 ) );
+                    g2.drawLine ( Points.get ( i) , cnt,Points.get ( i+1 ),cnt+10);
+                    cnt+=10;
+                }
+//                g2.drawLine (53 ,10,98,20 );
+//                g2.drawLine (98 ,20,183,30 );
+//                g2.drawLine (183 ,30,37,40 );
+//                g2.drawLine (37 ,40,122,50 );
+//                g2.drawLine (122 ,50,14,60 );
+//                g2.drawLine (14 ,60,124,70 );
+//                g2.drawLine (124 ,70,65,80 );
+//                g2.drawLine (65 ,80,67,90 );
+
+            }
+        };
+        form.add ( pnl );
+        pnl.setBounds ( 0,0,form.getWidth (),form.getHeight () );
+    }
+}
 public class Main {
     public static ArrayList<Integer>list = new ArrayList<Integer>() ;
 
@@ -129,61 +184,152 @@ public class Main {
                             temp+=info.charAt ( i );
                         }
                     }
+                    System.out.println ( "FCFS Results:" );
                     FCFS obj1 = new FCFS( n[0] ,list, head[0] ) ;
                     obj1.operate();
-
+                    System.out.println ( "SCAN Results:" );
                     SCAN obj2 = new SCAN( n[0] ,list, head[0] ,200,false) ;
                     //last parameter is for direction of scan
                     // if direction is true then it will move right first else it will move left first
                     obj2.operate();
-
+                    System.out.println ( "LOOK Results:" );
                     LOOK obj3 = new LOOK( n[0] ,list, head[0] ,false) ;
                     //last parameter is for direction of scan
                     // if direction is true then it will move right first else it will move left first
                     obj3.operate();
-
+                    System.out.println ( "OPT Results:" );
                     OPT obj4 = new OPT( n[0] ,list, head[0] ) ;
                     obj4.operate();
+                    System.out.println ( "Circle Look Results:" );
                     Circular_Look obj5 =new Circular_Look ( list,head[0],n[0] );
                     System.out.println ( "Cost = " +obj5.operate ());
                     System.out.println (  obj5.getPath ());
+                    System.out.println ( "Circle SCAN Results:" );
                     Circular_SCAN obj6 =new Circular_SCAN ( list,head[0],n[0],200 );
                     System.out.println ( "Cost = " +obj6.operate ());
                     System.out.println (  obj6.getPath ());
+                    System.out.println ( "SSTF Results:" );
                     SSTF obj7 =new SSTF ( list,head[0],n[0]);
                     System.out.println ( "Cost = " +obj7.operate ());
                     System.out.println (  obj7.getPath ());
 
+                    JFrame frameFCFS=new JFrame ( "FCFS Algorithm" );
+                    MyDraw m1=new MyDraw ( frameFCFS,obj1.getQueue () );
+                    m1.drawLine ();
+                    frameFCFS.setVisible ( true );
+                    frameFCFS.setSize ( 400,400 );
+
+                    JFrame frameSCAN=new JFrame ( "SCAN Algorithm" );
+                    MyDraw m2=new MyDraw ( frameSCAN,obj2.getQueue () );
+                    m2.drawLine ();
+                    frameSCAN.setVisible ( true );
+                    frameSCAN.setSize ( 400,400 );
+
+                    JFrame frameLOOK=new JFrame ( "LOOK Algorithm" );
+                    MyDraw m3=new MyDraw ( frameLOOK,obj3.getQueue () );
+                    m3.drawLine ();
+                    frameLOOK.setVisible ( true );
+                    frameLOOK.setSize ( 400,400 );
+
+                    JFrame frameOPT=new JFrame ( "OPT Algorithm" );
+                    MyDraw m4=new MyDraw ( frameOPT,obj4.getQueue () );
+                    m4.drawLine ();
+                    frameOPT.setVisible ( true );
+                    frameOPT.setSize ( 400,400 );
+
+                    JFrame frameCircleLOOK=new JFrame ( "CircleLOOK Algorithm" );
+                    MyDraw m5=new MyDraw ( frameCircleLOOK,obj5.getPath () );
+                    m5.drawLine ();
+                    frameCircleLOOK.setVisible ( true );
+                    frameCircleLOOK.setSize ( 400,400 );
+
+                    JFrame frameCircleSCAN=new JFrame ( "CircleSCAN Algorithm" );
+                    MyDraw m6=new MyDraw ( frameCircleSCAN,obj6.getPath () );
+                    m6.drawLine ();
+                    frameCircleSCAN.setVisible ( true );
+                    frameCircleSCAN.setSize ( 400,400 );
+
+                    JFrame frameSSTF=new JFrame ( "SSTF Algorithm" );
+                    MyDraw m7=new MyDraw ( frameSSTF,obj7.getPath () );
+                    m7.drawLine ();
+                    frameSSTF.setVisible ( true );
+                    frameSSTF.setSize ( 400,400 );
                 }
             };
          sendInputs.addActionListener ( al );
         }
        if(op!=3)
        {
+           System.out.println ( "FCFS Results:" );
            FCFS obj1 = new FCFS( n[0] ,list, head[0] ) ;
            obj1.operate();
-
+           System.out.println ( "SCAN Results:" );
            SCAN obj2 = new SCAN( n[0] ,list, head[0] ,200,false) ;
            //last parameter is for direction of scan
            // if direction is true then it will move right first else it will move left first
            obj2.operate();
-
+           System.out.println ( "LOOK Results:" );
            LOOK obj3 = new LOOK( n[0] ,list, head[0] ,false) ;
            //last parameter is for direction of scan
            // if direction is true then it will move right first else it will move left first
            obj3.operate();
-
+           System.out.println ( "OPT Results:" );
            OPT obj4 = new OPT( n[0] ,list, head[0] ) ;
            obj4.operate();
+           System.out.println ( "Circle Look Results:" );
            Circular_Look obj5 =new Circular_Look ( list,head[0],n[0] );
            System.out.println ( "Cost = " +obj5.operate ());
            System.out.println (  obj5.getPath ());
+           System.out.println ( "Circle SCAN Results:" );
            Circular_SCAN obj6 =new Circular_SCAN ( list,head[0],n[0],200 );
            System.out.println ( "Cost = " +obj6.operate ());
            System.out.println (  obj6.getPath ());
+           System.out.println ( "SSTF Results:" );
            SSTF obj7 =new SSTF ( list,head[0],n[0]);
            System.out.println ( "Cost = " +obj7.operate ());
            System.out.println (  obj7.getPath ());
+
+           JFrame frameFCFS=new JFrame ( "FCFS Algorithm" );
+           MyDraw m1=new MyDraw ( frameFCFS,obj1.getQueue () );
+           m1.drawLine ();
+           frameFCFS.setVisible ( true );
+           frameFCFS.setSize ( 400,400 );
+
+           JFrame frameSCAN=new JFrame ( "SCAN Algorithm" );
+           MyDraw m2=new MyDraw ( frameSCAN,obj2.getQueue () );
+           m2.drawLine ();
+           frameSCAN.setVisible ( true );
+           frameSCAN.setSize ( 400,400 );
+
+           JFrame frameLOOK=new JFrame ( "LOOK Algorithm" );
+           MyDraw m3=new MyDraw ( frameLOOK,obj3.getQueue () );
+           m3.drawLine ();
+           frameLOOK.setVisible ( true );
+           frameLOOK.setSize ( 400,400 );
+
+           JFrame frameOPT=new JFrame ( "OPT Algorithm" );
+           MyDraw m4=new MyDraw ( frameOPT,obj4.getQueue () );
+           m4.drawLine ();
+           frameOPT.setVisible ( true );
+           frameOPT.setSize ( 400,400 );
+
+           JFrame frameCircleLOOK=new JFrame ( "CircleLOOK Algorithm" );
+           MyDraw m5=new MyDraw ( frameCircleLOOK,obj5.getPath () );
+           m5.drawLine ();
+           frameCircleLOOK.setVisible ( true );
+           frameCircleLOOK.setSize ( 400,400 );
+
+           JFrame frameCircleSCAN=new JFrame ( "CircleSCAN Algorithm" );
+           MyDraw m6=new MyDraw ( frameCircleSCAN,obj6.getPath () );
+           m6.drawLine ();
+           frameCircleSCAN.setVisible ( true );
+           frameCircleSCAN.setSize ( 400,400 );
+
+           JFrame frameSSTF=new JFrame ( "SSTF Algorithm" );
+           MyDraw m7=new MyDraw ( frameSSTF,obj7.getPath () );
+           m7.drawLine ();
+           frameSSTF.setVisible ( true );
+           frameSSTF.setSize ( 400,400 );
        }
 
 
